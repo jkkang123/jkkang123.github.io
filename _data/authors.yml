@@ -1,7 +1,7 @@
 # The primary author of this blog.
 # Must be the same as `author` in `_config.yml`.
 # Change `qwtel` to your shortname (used in the front matter to set a page's author, e.g. `author: qwtel`).
-vvs:
+Envi:
   name:              JaeKyu Kang
   email:             jkkang123@naver.com
 
@@ -11,6 +11,13 @@ vvs:
   about:             |
     간단한 자기소개
     저는 프론트 엔드 개발자를 목표로 하고있습니다.
+
+  Sidebar-picture:
+    src:             /assets/img/sideber-me.jpg
+    # srcset is optional, but can be used to provide higher res versions for retina displays
+    srcset:
+      1x:            /assets/img/sideber-me.jpg
+      2x:            /assets/img/sideber-me.jpg
 
 
   # This photo will be used in the about section
@@ -25,7 +32,7 @@ vvs:
   # Comment/uncommet to show/hide
   # Icons appear in order, can be rearranged:
   social:
-    # facebook:         khw11044
+    # facebook:        <username>
     # twitter:         <username>
     # google:          <number>
     # vk:              <username>
@@ -60,8 +67,8 @@ vvs:
     # delicious:       <username>
     # stumbleupon:     <username>
     # paypal:          <username>
-    email:           jkkang123@naver.com
-    rss:             https://khw11044.github.io/feed.xml
+    email:           worb0303@gmail.com
+    rss:             https://jkkang123.github.io/feed.xml
 
 # Another author
 author2:
