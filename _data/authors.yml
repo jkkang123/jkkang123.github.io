@@ -9,7 +9,7 @@ Envi:
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   # 자기 소개
   about:             |
-    저는 프론트 엔드 개발자를 목표로 하고있습니다.
+    프론트 엔드 개발자를 목표로 하고있는 사람입니다.
 
   Sidebar-picture:
     src:             /assets/img/sideber-me.jpg
