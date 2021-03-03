@@ -1,10 +1,12 @@
 ---
+title: "[ES5] 함수형 프로그래밍"
 layout: post
-title: ES5-functional Programming
 subtitle: 함수형 프로그래밍
 categories: study
 tags: ES5
 comments: true
+related_posts:
+- category/_posts/study/2021-03-03-es5-functional-programming.md
 ---
 
 # 함수형 프로그래밍에 대해서
