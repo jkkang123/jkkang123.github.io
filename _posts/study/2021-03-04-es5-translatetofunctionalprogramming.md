@@ -141,9 +141,12 @@ function _map(list, mapper){
 	return new_list;
 }
 
+var _length = _get('length');
+
 function _each(list, iter) {
-	for(var i = 0; i<list.length; i++) {
-		iter(list[i]);
+	var keys = _keys(list);
+	for((var i = 0, len = keys.length; i < len; i++) {
+		iter(list[keys[i]], keys[i]);
 	}
 	return list;
 }
@@ -257,4 +260,147 @@ console.log(_get(user1, 'name')); //ID
 console.log(_get('name')(user1)); //ID
 
 console.log(_get(users[10], 'name')); //undefined
+```
+##### reduce는 두번째로 받은 함수를 재귀적으로 실행하면서 대신해면서 값을 호출하는 함수이다.  어려운 로직을 단순하게 만들 수 있게 도와주는 함수이다.
+
+```
+// 4. _reduce 만들기
+var slice = Array.prototype.slice;
+function _rest(list, num) {
+	return slice.call(list, num || 1);
+}
+
+function _reduce(list, iter, memo) {
+	if(arguments.length == 2) {
+		memo = list[0];
+		list = _rest(list);
+	}
+	_each(list, fucntion(val) {
+		memo = iter(memo, val);
+	});
+return memo;
+}
+
+console.log(
+  _reduce([1, 2, 3], add, 10));
+// 16
+
+console.log(
+  _reduce([1, 2, 3], add));
+// 6
+```
+
+##### 파이프라인은 파이프처럼 함수를 차례대로 실행시켜서 값을 넘겨받는 방식이다.
+
+```
+// 1. _pipe
+function _pipe() {
+	var fns arguments;
+	return function(arg) {
+		return _reduce(fns, function(arg, fn) {
+			return fn(arg);
+		}, arg);
+	}
+}
+
+var f1 = _pipe(
+  function(a) { return a + 1; }, //1 + 1
+  function(a) { return a * 2; }, // 2 * 2
+  function(a) { return a * a; }); // 4 * 4
+console.log( f1(1) ); //16
+```
+
+##### go함수는 첫번째 값만 인자로 받고 두번째 값부터는 함수로 받아서 결과를 바로 만드는 함수이다.
+
+```
+  // 2. _go
+	function _go() {
+		var fns = _rest(arguments);
+		return _pipe.apply(null, fns)(arg);
+	}
+	
+_go(1,
+  function(a) { return a + 1; },
+  function(a) { return a * 2; },
+  function(a) { return a * a; },
+  console.log); // 16
+```
+
+```
+  // 3. users에 _go 적용
+
+console.log(
+  _map(
+    _filter(users, function(user) { return user.age >= 30; }),
+    _get('name')));
+
+console.log(
+  _map(
+    _filter(users, function(user) { return user.age < 30; }),
+    _get('age')));
+
+_go(users,
+  _filter(function(user) { return user.age >= 30; }),
+  _map(_get('name')),
+  console.log);
+
+_go(users,
+  _filter(user => user.age < 30),
+  _map(_get('age')),
+  console.log);
+```
+
+##### 밑에는 Null값이나 다른 값들을 넣어도 에러가 안나게 하는 방법들이다.
+
+```
+// 6. _each의 외부 다형성 높이기
+  // 1. _each에 null 넣어도 에러 안나게
+_each(null, console.log);
+console.log( _filter(null, function(v) { return v; }) );
+
+  // 2. _keys 만들기
+  // 3. _keys에서도 _is_object인지 검사하여 null 에러 안나게
+
+function _is_object(obj) {
+  return typeof obj == 'object' && !!obj;
+}
+
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+
+console.log( _keys({ name: 'ID', age: 33 }) ); //["name", "age"]
+console.log( _keys([1, 2, 3, 4]) ); // ["0', "1", "2", "3"]
+console.log( _keys(10) ); // []
+console.log( _keys(null) );
+```
+
+```
+  // 4. _each 외부 다형성 높이기
+  _each({
+    13: 'ID',
+    19: 'HD',
+    29: 'YD'
+  }, function(name) {
+    console.log(name);
+  });
+
+  console.log( _map({
+    13: 'ID',
+    19: 'HD',
+    29: 'YD'
+  }, function(name) {
+    return name.toLowerCase();
+  }) );
+
+  _go({
+      1: users[0],
+      3: users[2],
+      5: users[4]
+    },
+    _map(function(user) {
+      return user.name.toLowerCase();
+    }),
+    console.log);
+
 ```
