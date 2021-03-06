@@ -6,7 +6,7 @@ categories: study
 tags: ES5
 comments: true
 related_posts:
-- category/_posts/study/2021-03-03-es5-functional-programming.md
+- category/_posts/study/2021-03-04-es5-translatetofunctionalprogramming
 ---
 
 # 함수형 프로그래밍에 대해서
