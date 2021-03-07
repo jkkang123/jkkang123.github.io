@@ -9,7 +9,6 @@ related_posts:
 - category/_posts/study/2021-03-04-es5-translatetofunctionalprogramming
 ---
 
-
 ### 컬렉션 중심 프로그래밍
 
 ##### 컬렉션 중심 프로그래밍의 4가지 유형과 함수
@@ -206,4 +205,152 @@ console.log(
     return user.age < 20;
   })
 ); //true
+```
+
+##### Reduce함수와 min과 max 함수
+
+```
+// 4. 접기 - reduce
+//   1. min, max, min_by, max_by
+
+function _min(data) {
+  return _reduce(data, function(a, b) {
+    return a < b ? a : b;
+  });
+}
+
+function _max(data) {
+  return _reduce(data, function(a, b) {
+    return a > b ? a : b;
+  });
+}
+
+console.log(
+  _min([1, 2, 4, 10, 5, -4])
+); //-4
+
+console.log(
+  _max([1, 2, 4, 10, 5, -4])
+); //10
+
+function _min_by(data, iter) {
+  return _reduce(data, function(a, b) {
+    return iter(a) < iter(b) ? a : b;
+  });
+}
+function _max_by(data, iter) {
+  return _reduce(data, function(a, b) {
+    return iter(a) > iter(b) ? a : b;
+  });
+}
+
+var _min_by = _curryr(_min_by),
+  _max_by = _curryr(_max_by);
+
+console.log(
+  _min_by([1, 2, 4, 10, 5, -4], Math.abs)
+); //1
+
+console.log(
+  _max_by([1, 2, 4, 10, 5, -4, -11], Math.abs)
+); //-11
+```
+##### Group by, Push 함수
+
+```
+// 2. group_by, push
+var users = [
+  { id: 10, name: 'ID', age: 36 },
+  { id: 20, name: 'BJ', age: 32 },
+  { id: 30, name: 'JM', age: 32 },
+  { id: 40, name: 'PJ', age: 27 },
+  { id: 50, name: 'HA', age: 25 },
+  { id: 60, name: 'JE', age: 26 },
+  { id: 70, name: 'JI', age: 31 },
+  { id: 80, name: 'MP', age: 23 },
+  { id: 90, name: 'FP', age: 13 }
+];
+
+//var users2 = {
+//  36: [{ id: 10, name: 'ID', age: 36 }],
+//  32: [{ id: 20, name: 'BJ', age: 32 }, { id: 30, name: 'JM', age: 32 }],
+//  27: [],
+//  ...
+//}
+
+function _push(obj, key, val) {
+  (obj[key] = obj[key] || []).push(val);
+  return obj;
+}
+
+var _group_by = _curryr(function(data, iter) {
+  return _reduce(data, function(grouped, val) {
+    return _push(grouped, iter(val), val);
+  }, {});
+});
+
+_go(users,
+  _group_by(_get('age')),
+  console.log); //나이별로 그룹
+	
+	
+	_go(users,
+  _group_by(function(user) {
+    return user.age - user.age % 10;
+  }),
+  console.log); //몇십대인지 확인할수있는 그룹
+	
+	_go(users,
+  _group_by(function(user) {
+    return user.name[0];
+  }),
+  console.log); //무슨알파벳으로 시작하는 사람
+	
+	var _head = function(list) {
+  return list[0];
+};
+
+_go(users,
+  _group_by(_pipe(_get('name'), _head)),
+  console.log); ////무슨알파벳으로 시작하는 사람
+
+
+```
+
+##### Count by 함수
+```
+//   3. count_by, inc
+
+var _inc = function(count, key) {
+  count[key] ? count[key]++ : count[key] = 1;
+  return count;
+};
+
+var _count_by = _curryr(function(data, iter) {
+  return _reduce(data, function(count, val) {
+    return _inc(count, iter(val));
+  }, {});
+});
+
+console.log(
+  _count_by(users, function(user) {
+    return user.age - user.age % 10;
+  })
+); //나이대가 몇명인지 확인
+```
+##### 나이대가 몇명인지 HTML에 적는 함수
+
+```
+var _pairs = _map((val,key) => [key, val]);
+
+console.log( _pairs(users[0]));
+
+var f1 = _pipe(
+  _count_by(function(user) { return user.age - user.age % 10; }),
+  _map((count, key) => `<li>${key}대는 ${count}명 입니다.</li>`),
+  list => '<ul>' + list.join('') + '</ul>',
+  document.write.bind(document));
+
+_go(users, _reject(user => user.age < 20), f1);
+_go(users, _filter(user => user.age < 20), f1);
 ```
