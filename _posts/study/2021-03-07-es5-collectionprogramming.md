@@ -7,6 +7,7 @@ tags: ES5
 comments: true
 related_posts:
 - category/_posts/study/2021-03-04-es5-translatetofunctionalprogramming
+- category/_posts/study/2021-03-10-es5-delay-evaluation
 ---
 
 ### 컬렉션 중심 프로그래밍
