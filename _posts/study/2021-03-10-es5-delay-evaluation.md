@@ -7,6 +7,7 @@ tags: ES5
 comments: true
 related_posts:
 - category/_posts/study/2021-03-07-es5-collectionprogramming
+- category/_posts/study/2021-03-11-es5-users-posts-comments
 ---
 
 ## 엄격한 평가와 지연평가
