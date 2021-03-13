@@ -48,6 +48,7 @@ google_analytics:    G-8RRX6Z21Z0
 # 댓글기능
 disqus: True
 disqus_shortname: jkkang123
+utterances: True
 
 # This text will appear in the footer of every page. Markdown enabled.
 copyright:           '&copy; 2020.12. by 엔비'

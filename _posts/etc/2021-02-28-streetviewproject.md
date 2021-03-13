@@ -52,6 +52,7 @@ categories:
 * #### 개발 라이브러리
 개발 라이브러리는 metadata-extractor과 Adobe XD를 사용한다. metadata-extractor는 JPEG, TIFF등 이미지 파일에 각종 메타정보를 저장하는 포맷이다. <br>
 Adobe XD는 웹사이트, 모바일 앱 등을 디자인하기 위한 올 인원 UX./UI 솔루션 라이브러리 이다.
+<br><br>![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820379193288032316/unknown.png)
 
 ---
 ### 3. 개발 및 설계<br>
@@ -63,18 +64,24 @@ Adobe XD는 웹사이트, 모바일 앱 등을 디자인하기 위한 올 인원
 - ##### Index페이지
 헤더의 네비게이션에 Home 과 Map 그리고 로그인 버튼을 제작해서 Home에는 Index페이지의 링크를, Map에는 카카오 MapAPI를 이용한 지도페이지의 링크를 첨부한다. <br>
 그리고 간단한 페이지 소개문구와 하단에는 이 웹페이지를 통해서 할 수 있는 기능들을 설명이 되어있고 화면에는 나타나지 않지만 코드에는 하단에 Firebase서버의 스크립트가 등록이 되어있어 현재 자신의 로그인이 되어있는 아이디가 우측 상단에 뜰 수 있도록 구현되어있다.
+![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380810288824330/unknown.png)
+
 - ##### 로그인페이지
 Index페이지의 로그인 버튼은 누르게 되면 로그인 페이지가 뜨게 링크를 첨부하였는데, 로그인에는 자신의 이메일과 패스워드를 입력하게 되면 회원가입이 되고 그 회원가입한 정보들은 자동으로 Firebase서버에 등록이 되어서 로그인을 할 때 사용할 수 있다. <br>
 그리고 로그인 위에는 소셜로그인을 가능한 Facebook과 Google 마크가 그려진 버튼이 있다.
 이 버튼을 통해 자신의 Facebook과 Google의 회원정보를 통해 인덱스 페이지에 접속이 가능하다. 
+![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380712640577576/unknown.png)
+
 - ##### Map페이지
 카카오 MapAPI를 이용해서 만든 Map 페이지에는 MapAPI에서 제공하는 기능들로 구현이 되어있다. <br>
 <br>처음에 Map 페이지에 접속하게 되면 자신의 현재위치정보의 검색을 허용하는 팝업이 뜨게 되며 허용 버튼을 누르면 현재위치로 마커가 이동이 된다. <br>
+![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380751769894952/unknown.png)<br>
 그리고 마커를 클릭하게 되면 인포윈도우가 뜰 수 있게 버튼이벤트를 구현하였고 인포윈도우에는 그 마커의 등록이 되어있는 미디어의 목록버튼과 등록을 할 수 있는 등록 버튼이 구현되어있다. <br>
 목록버튼을 클릭하게 되면 팝업창이 뜨게 되고 그 팝업창에는 마커에 등록 되어있는 미디어의 목록이 있다. <br>
 그리고 등록버튼을 클릭하면 파일 선택 이벤트 처리가 발생하고 해당 어플리케이션을 실행한 전자기기에서 미디어 파일을 등록할 수 있게 하였다.<br>
 또한 등록이 성공적으로 되면 Firebas의 Storage서버와 Realtime Database서버에 자동적으로 등록한 파일과 파일의 정보와 업로드된다.
 
+<center>![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380769662664724/unknown.png)</center>
 ---
 ## 3. 결론
 ---
