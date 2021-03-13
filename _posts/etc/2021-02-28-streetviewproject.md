@@ -81,7 +81,7 @@ Index페이지의 로그인 버튼은 누르게 되면 로그인 페이지가 �
 그리고 등록버튼을 클릭하면 파일 선택 이벤트 처리가 발생하고 해당 어플리케이션을 실행한 전자기기에서 미디어 파일을 등록할 수 있게 하였다.<br>
 또한 등록이 성공적으로 되면 Firebas의 Storage서버와 Realtime Database서버에 자동적으로 등록한 파일과 파일의 정보와 업로드된다.
 
-<center>![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380769662664724/unknown.png)</center>
+![appFunc](https://cdn.discordapp.com/attachments/700628529968054284/820380769662664724/unknown.png)
 ---
 ## 3. 결론
 ---
